@@ -1,3 +1,5 @@
+# Day 02 -- December 2, 2023
+
 import re
 
 from util import read_input

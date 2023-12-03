@@ -1,3 +1,5 @@
+# Day 01 -- December 1, 2023
+
 from util import read_input
 from typing import List
 
