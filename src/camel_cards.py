@@ -17,36 +17,35 @@ class Hand:
             else:
                 type_to_count[card] = 1
         
-        num_types = len(type_to_count.keys())
         distribution = sorted(list(type_to_count.values()))
         if (self.p2_flag and 'J' not in self.cards) or not self.p2_flag:
-            if num_types == 1:
+            if distribution == [5]:
                 self.type = "FIVE_OF_A_KIND"
-            elif num_types == 2 and distribution == [1, 4]:
+            elif distribution == [1, 4]:
                 self.type = "FOUR_OF_A_KIND"
-            elif num_types == 2 and distribution == [2, 3]:
+            elif distribution == [2, 3]:
                 self.type = "FULL_HOUSE"
-            elif num_types == 3 and distribution == [1, 1, 3]:
+            elif distribution == [1, 1, 3]:
                 self.type = "THREE_OF_A_KIND"
-            elif num_types == 3 and distribution == [1, 2, 2]:
+            elif distribution == [1, 2, 2]:
                 self.type = "TWO_PAIR"
-            elif num_types == 4 and distribution == [1, 1, 1, 2]:
+            elif distribution == [1, 1, 1, 2]:
                 self.type = "ONE_PAIR"
             else:
                 self.type = "HIGH_CARD"
         else:
-            self.set_type_with_jokers(num_types, distribution, type_to_count)
+            self.set_type_with_jokers(distribution, type_to_count)
 
-    def set_type_with_jokers(self, num_types: int, distribution: int, type_to_count: Dict[str, int]):
-        if num_types == 1 or num_types == 2:
+    def set_type_with_jokers(self, distribution: int, type_to_count: Dict[str, int]):
+        if distribution == [5] or distribution == [1, 4] or distribution == [2, 3]:
             self.type = "FIVE_OF_A_KIND"
-        elif num_types == 3 and distribution == [1, 1, 3]:
+        elif distribution == [1, 1, 3]:
             self.type = "FOUR_OF_A_KIND"
-        elif num_types == 3 and distribution == [1, 2, 2] and type_to_count['J'] == 1:
+        elif distribution == [1, 2, 2] and type_to_count['J'] == 1:
             self.type = "FULL_HOUSE"
-        elif num_types == 3 and distribution == [1, 2, 2] and type_to_count['J'] == 2:
+        elif distribution == [1, 2, 2] and type_to_count['J'] == 2:
             self.type = "FOUR_OF_A_KIND"
-        elif num_types == 4:
+        elif distribution == [1, 1, 1, 2]:
             self.type = "THREE_OF_A_KIND"
         else:
             self.type = "ONE_PAIR"
